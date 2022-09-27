@@ -286,10 +286,10 @@ def leaveapplicationoutput():
     print("all modification done...")
     return render_template('leaveapplicationoutput.html', name=emp_name)
 
-#Leave Approval 
-@app.route("/leaveapproval/")
-def leaveapproval():
-    return render_template("leaveapproval.html",date=datetime.now())
+# #Leave Approval 
+# @app.route("/leaveapproval/")
+# def leaveapproval():
+#     return render_template("leaveapproval.html",date=datetime.now())
 
 # RMB TO CHANGE PORT NUMBER
 if __name__ == "__main__":
