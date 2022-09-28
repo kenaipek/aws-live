@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Attendance</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='core.css')}}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='core-desktop.css')}}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='core-1200px.css')}}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='core-noscript.css')}}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style-desktop.css')}}" />
+  <script href="{{ url_for('static', filename='jquery.js')}}"></script>
+  <script
+    href="{{ url_for('static', filename='init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none')}}"></script>
+<!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css"><![endif]-->
+<style type="text/css">
+  /* Hide arrow increment on number Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .form-container {
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 50vh;
+    background-color: #D8D4BE;
+    border-radius: 15px;
+    align-self: center;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-bubble {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .form-bubble-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 50%;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  .form-bubble label {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .form-bubble input {
+    padding: 5px 10px;
+    font-size: 13px;
+    width: 80%;
+    border-color: #f0f1f2;
+    background-color: #f6f6f6;
+    border-style: solid;
+    border-radius: 8px;
+    outline: none;
+    height: 30px;
+  }
+
+  .form-bubble input:focus {
+    border-color: #53544e;
+    transition: 0.5s;
+  }
+
+  .input-icons {
+    position: absolute;
+    right: 60px;
+    top: 55%;
+    width: 18px;
+  }
+
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  .custom-file-input::before {
+    content: 'Upload Image';
+    color: #707070;
+    display: inline-block;
+    background-color: #f6f6f6;
+    outline: none;
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+    line-height: 30px;
+    padding-right: 14px;
+  }
+
+  .custom-file-input:hover::before {
+    border-color: black;
+  }
+
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }
+
+  .button-container1 {
+    position: relative;
+    display: block;
+    justify-content: center;
+    align-self: center;
+    width: auto;
+    background-color: #ffffff;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    margin: auto;
+  }
+
+  .button-container2 {
+    position: relative;
+    display: block;
+    justify-content: center;
+    align-self: center;
+    width: auto;
+    background-color: #ffffff;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    margin: auto;
+  }
+
+  .button-container {
+    position: relative;
+    display: block;
+    justify-content: center;
+    align-self: center;
+    width: auto;
+    background-color: #ffffff;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    margin: -10px 0 0 0;
+  }
+
+  .button-container::before {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    left: -20px;
+    height: 50px;
+    width: 30px;
+    border-top-right-radius: 22px;
+    box-shadow: 0 -20px 0 0 white;
+  }
+
+  .button-container::after {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    right: -30px;
+    height: 50px;
+    width: 30px;
+    border-top-left-radius: 22px;
+    box-shadow: 0 -20px 0 0 white;
+  }
+
+  .form-button1 {
+    background-color: #53544e;
+    border: 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    padding: 10px 60px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  .form-button2 {
+    background-color: #53544e;
+    border: 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    padding: 10px 60px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-top: 5%;
+    margin-left: 18%;
+
+  }
+
+  .form-button {
+    background-color: #53544e;
+    border: 0px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    padding: 10px 60px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <header id="header">
+    <div class="5grid-layout">
+      <div class="row">
+        <div class="12u" id="logo">
+          <!-- Logo -->
+          <h1><a href="#" class="mobileUI-site-name">JSZ HR SYSTEM</a></h1>
+          <p>Attendance</p>
+        </div>
+      </div>
+    </div>
+    <div class="5grid-layout">
+      <div class="row">
+        <div class="12u" id="menu">
+          <div id="menu-wrapper">
+            <nav class="mobileUI-site-nav">
+              <ul>
+                <li><a href="/">Homepage</a></li>
+                <li class="current_page_item"><a href="/attendance/">Attendance</a></li>
+                <li><a href="/addemp/">Add Employee</a></li>
+                <li><a href="/getemp/">Get Employee Details</a></li>
+                <li><a href="/payroll/">Payroll Calculator</a></li>
+                <li><a href="/leaveapplication/">Leave Application</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="page">
+    <div class="5grid-layout" id="content">
+      <div class="row">
+        <div class="12u">
+          <section>
+            <center>
+            <div class="post">
+              <h2>ATTENDANCE FORM</h2>
+              <p>Please fill the employee details</p>
+              <div class="form-container form-container-get">
+                <form action="/attendance/output" autocomplete="on" method="POST" class="form-bubble">
+                <div class="form-bubble-container">
+                  <label>Employee ID:</label>
+                  <input type="number" name="emp_id" autofocus size="40">
+                </div><br>
+                    <div class="button-container1">
+                        <button type="submit" formaction="/attendance/checkIn" class="form-button">CHECK IN</button>
+                        <a href="/attendance/output">
+                      <button type="submit" class="form-button">CHECK OUT</button>
+                    </a>
+                      </div>
+                </form>
+            </div>
+            </div>
+          </center>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="5grid-layout">
+  <div class="row" id="footer-content">
+    <div class="3u">
+      <section id="box1">
+        <h2>About</h2>
+        <ul class="style3">
+          <li class="first">
+            <p class="date">Vision</p>
+            <p>Attain organizational excellence by developing and inspiring the true 
+              potential of company's human capital and providing opportunities for growth, 
+              well being & enrichment</p>
+          </li>
+          <li>
+            <p class="date">Mission</p>
+            <p>Recruitment of qualified individuals</p>
+            <p>Retention of valuable employees</p>
+            <p>Training, development and education to promote individual success and increase overall value to the organization</p>
+            <p>A safe and healthful working environment</p>
+            <p>Resources for administering benefits, policies and procedures</p>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <div class="6u">
+      <section id="box2">
+        <h2>History</h2>
+        <div class="border-img"> <a href="#"><img src="{{ url_for('static', filename='img/pics02.jpg')}}" alt=""></a> </div>
+        <p>Remote work isn't the only virtual thing that's changing. Digital tools and software have been essential to the 
+          long-term growth and success of most businesses. We've seen the evolution of HRIS tools, collaborative working options, 
+          and more. Now more than ever are those tools important to increase productivity and organization to achieve your business goals.
+          A current and future HR focus should be involved in the diversity, equality, and inclusion of the workplace. 
+          In response to various social movements in recent years, this has become a significant focus for companies looking 
+          towards the future.</p>
+      </section>
+    </div>
+    <div class="3u">
+      <section id="box3">
+        <h2>Quick Links</h2>
+        <ul class="style1">
+          <li class="first"><a href="#">Partnerships</a></li>
+          <li><a href="#">Career</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+<div id="copyright" class="5grid-layout">
+  <section>
+    <p>ALL RIGHTS RESERVED. 2022. © JSZ</p>
+  </section>
+</div>
+</body>
+</html>
